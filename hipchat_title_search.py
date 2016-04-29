@@ -5,6 +5,26 @@ hipchat, this can provide usefull utilites (at bottom) such as searching users b
 - Mark Davidoff, 2016, Reserved
 """
 
+""" HACK :(
+
+requests changed some things in 1.0.0+
+Response.json() is now callable, not a property.
+Make this agnostic
+"""
+import requests
+import pkg_resources
+version = pkg_resources.get_distribution("requests").version
+split = version.split('.')
+if split and len(split) > 1 and split[0] == '1':
+  def get_json(response):
+    return response.json
+else:
+  def get_json(response):
+    return response.json()
+"""
+End Hack
+"""
+
 # url of your hipchat server
 HIPCHAT_SERVER_URL = "<sub>.hipchat.com"
 
@@ -27,7 +47,7 @@ except NameError:
     get_user_info_url = 'https://{}/v2/user/{}?auth_token={}'.format(HIPCHAT_SERVER_URL,'{}', ACCESS_TOKEN)
     print "retrieving list of users..."
     r = requests.get(get_users_url)
-    users = r.json['items']
+    users = get_json(r)['items']
     user_ids = [user['id'] for user in users]
 
 
@@ -43,7 +63,7 @@ for u_id in user_ids:
         
     url = get_user_info_url.format(u_id)
     r = requests.get(url)
-    resp = r.json
+    resp = get_json(r)
     # print "retrieved name: {} role: {}...".format(resp['name'],resp['title'])
     role_dict[resp['title']].append(resp['name'])
 
