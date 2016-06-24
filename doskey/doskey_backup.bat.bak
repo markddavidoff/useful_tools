@@ -1,0 +1,18 @@
+@echo off
+DOSKEY open_sidebar=(adb shell am startservice --user 0 -n com.android.systemui/.SystemUIService)
+DOSKEY ip=ipconfig $b grep IPv4
+DOSKEY get=(git pull origin POSMON-$1)
+DOSKEY getl=(git pull origin live)
+DOSKEY get_branch=(git checkout -b POSMON-$1 origin/POSMON-$1)
+DOSKEY branch=(git checkout -b $1)
+DOSKEY switch=(git checkout POSMON-$1)
+DOSKEY switchl=(git checkout live)
+DOSKEY push = C:\doskey\push_current_branch.bat
+DOSKEY shortcuts= (type C:\doskey\shortcuts.txt)
+DOSKEY cuts= (type C:\doskey\shortcuts.txt)
+DOSKEY cut= (type C:\doskey\shortcuts.txt)
+DOSKEY search_app_config = (adb shell cat /sdcard/elc/resources/el_torito_qa_lab/app_config.yaml $b grep $1)
+DOSKEY grep_app_config = (adb shell cat /sdcard/elc/resources/el_torito_qa_lab/app_config.yaml $b grep $1)
+DOSKEY get_presto_config = (adb shell cat /sdcard/elc/cached_presto_config.txt $g cached_presto_config.txt)
+DOSKEY set_presto_config = (adb push cached_presto_config.txt /sdcard/elc/)
+@echo on

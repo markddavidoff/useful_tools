@@ -1,0 +1,21 @@
+for /f "tokens=*" %x in ('git branch ^| sed -n "/\* /s///p"') do (git push origin %x)
+
+
+@echo off
+DOSKEY open_sidebar=(adb shell am startservice --user 0 -n com.android.systemui/.SystemUIService)
+DOSKEY ip=ipconfig
+DOSKEY get=(git pull origin POSMON-$1)
+DOSKEY getl=(git pull origin live)
+DOSKEY get_branch=(git checkout -b POSMON-$1 origin/POSMON-$1)
+DOSKEY branch=(git checkout -b $1)
+DOSKEY switch=(git checkout POSMON-$1)
+DOSKEY switchl=(git checkout live)
+echo Shortcuts:
+echo ip         : ipconfig 
+echo get        : git pull origin POSMON-$1
+echo getl       : git pull origin live)
+echo get_branch : git checkout -b POSMON-$1 origin/POSMON-$1
+echo branch     : git checkout -b $1
+echo switch     : git checkout POSMON-$1
+echo switchl    : git checkout live
+@echo on
