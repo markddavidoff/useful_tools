@@ -5,6 +5,7 @@ DOSKEY get=git pull origin master
 DOSKEY branch=git checkout -b $1
 DOSKEY branchp=git checkout -b POSMON-$1
 DOSKEY push = C:\doskey\push_current_branch.bat
+DOSKEY pull = C:\doskey\pull_current_branch.bat
 DOSKEY switchl=(git checkout live)
 DOSKEY live=(git checkout live)
 DOSKEY switch=(git checkout $1)
